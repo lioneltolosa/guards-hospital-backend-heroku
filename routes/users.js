@@ -1,34 +1,34 @@
-var express = require('express');
-var bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');
+// var express = require('express');
+// var bcrypt = require('bcryptjs');
+// var jwt = require('jsonwebtoken');
 
-// var mdAutenticacion = require('../middlewares/autenticacion');
+// // var mdAutenticacion = require('../middlewares/autenticacion');
 
-var app = express();
+// var app = express();
 
-var Usuario = require('../models/users');
+// var Usuario = require('../models/users');
 
-// ==========================================
-// Obtener todos los usuarios
-// ==========================================
-app.get('/', (req, res, next) => {
-    Usuario.find({}, 'nombre email img role')
-        .exec(
-            (err, usuarios) => {
-                if (err) {
-                    return res.status(500).json({
-                        ok: false,
-                        mensaje: 'Error cargando usuario',
-                        errors: err
-                    });
-                }
+// // ==========================================
+// // Obtener todos los usuarios
+// // ==========================================
+// app.get('/', (req, res, next) => {
+//     Usuario.find({}, 'nombre email img role')
+//         .exec(
+//             (err, usuarios) => {
+//                 if (err) {
+//                     return res.status(500).json({
+//                         ok: false,
+//                         mensaje: 'Error cargando usuario',
+//                         errors: err
+//                     });
+//                 }
 
-                res.status(200).json({
-                    ok: true,
-                    usuarios: usuarios
-                });
-            });
-});
+//                 res.status(200).json({
+//                     ok: true,
+//                     usuarios: usuarios
+//                 });
+//             });
+// });
 
 // ==========================================
 // Actualizar usuario
@@ -90,35 +90,35 @@ app.get('/', (req, res, next) => {
 // ==========================================
 // Crear un nuevo usuario
 // ==========================================
-app.post('/', (req, res) => {
+// app.post('/', (req, res) => {
 
-    var body = req.body;
+//     var body = req.body;
 
-    var usuario = new Usuario({
-        nombre: body.nombre,
-        email: body.email,
-        password: bcrypt.hashSync(body.password, 10),
-        img: body.img,
-        role: body.role
-    });
+//     var usuario = new Usuario({
+//         nombre: body.nombre,
+//         email: body.email,
+//         password: bcrypt.hashSync(body.password, 10),
+//         img: body.img,
+//         role: body.role
+//     });
 
-    usuario.save((err, usuarioGuardado) => {
+//     usuario.save((err, usuarioGuardado) => {
 
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                mensaje: 'Error al crear usuario',
-                errors: err
-            });
-        }
+//         if (err) {
+//             return res.status(400).json({
+//                 ok: false,
+//                 mensaje: 'Error al crear usuario',
+//                 errors: err
+//             });
+//         }
 
-        res.status(201).json({
-            ok: true,
-            usuario: usuarioGuardado,
-            usuariotoken: req.usuario
-        });
-    });
-});
+//         res.status(201).json({
+//             ok: true,
+//             usuario: usuarioGuardado,
+//             usuariotoken: req.usuario
+//         });
+//     });
+// });
 
 
 // ============================================
@@ -156,7 +156,7 @@ app.post('/', (req, res) => {
 // });
 
 
-module.exports = app;
+// module.exports = app;
 
 
 
@@ -170,11 +170,11 @@ module.exports = app;
 
 
 
-// var router = express.Router();
+var router = express.Router();
 
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
+});
 
-// module.exports = router;
+module.exports = router;
