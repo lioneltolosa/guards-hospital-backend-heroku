@@ -1,34 +1,34 @@
 var express = require('express');
-// var bcrypt = require('bcryptjs');
-// var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
 
-// // var mdAutenticacion = require('../middlewares/autenticacion');
+// var mdAutenticacion = require('../middlewares/autenticacion');
 
-// var app = express();
+var app = express();
 
-// var Usuario = require('../models/users');
+var Usuario = require('../models/users');
 
-// // ==========================================
-// // Obtener todos los usuarios
-// // ==========================================
-// app.get('/', (req, res, next) => {
-//     Usuario.find({}, 'nombre email img role')
-//         .exec(
-//             (err, usuarios) => {
-//                 if (err) {
-//                     return res.status(500).json({
-//                         ok: false,
-//                         mensaje: 'Error cargando usuario',
-//                         errors: err
-//                     });
-//                 }
+// ==========================================
+// Obtener todos los usuarios
+// ==========================================
+app.get('/users', (req, res, next) => {
+    Usuario.find({}, 'nombre email img role')
+        .exec(
+            (err, usuarios) => {
+                if (err) {
+                    return res.status(500).json({
+                        ok: false,
+                        mensaje: 'Error cargando usuario',
+                        errors: err
+                    });
+                }
 
-//                 res.status(200).json({
-//                     ok: true,
-//                     usuarios: usuarios
-//                 });
-//             });
-// });
+                res.status(200).json({
+                    ok: true,
+                    usuarios: usuarios
+                });
+            });
+});
 
 // ==========================================
 // Actualizar usuario
@@ -156,7 +156,7 @@ var express = require('express');
 // });
 
 
-// module.exports = app;
+module.exports = app;
 
 
 
@@ -170,11 +170,11 @@ var express = require('express');
 
 
 
-var router = express.Router();
+// var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// /* GET users listing. */
+// router.get('/', function(req, res, next) {
+//   res.send('respond with a resource');
+// });
 
-module.exports = router;
+// module.exports = router;
