@@ -11,7 +11,7 @@ var Usuario = require('../models/users');
 // ==========================================
 // Obtener todos los usuarios
 // ==========================================
-app.get('/', (req, res, next) => {
+app.get('/users', (req, res, next) => {
     Usuario.find({}, 'nombre email img role')
         .exec(
             (err, usuarios) => {
@@ -90,7 +90,7 @@ app.get('/', (req, res, next) => {
 // ==========================================
 // Crear un nuevo usuario
 // ==========================================
-app.post('/', (req, res) => {
+app.post('/users', (req, res) => {
 
     var body = req.body;
 

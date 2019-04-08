@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 
 // Imports Routes
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var usersRouter = require('./routes/users');
 var app = express();
 
 const port = process.env.PORT || 3000;
@@ -46,7 +46,9 @@ mongoose.set('useCreateIndex', true);
 
 // Routes
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
+
+app.use(require('./routes/users'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
