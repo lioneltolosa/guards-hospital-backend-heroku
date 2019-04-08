@@ -6,9 +6,11 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
+var Usuario = require('./models/users');
+
 // Imports Routes
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
 var app = express();
 
 const port = process.env.PORT || 3000;
@@ -34,12 +36,30 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/test', function(req, res) {
     res.json('get Usuario LOCAL!!!');
+});
+
+app.get('/users', (req, res, next) => {
+
+    Usuario.find({}, 'nombre email img role')
+        .exec(
+            (err, usuarios) => {
+                if (err) {
+                    return res.status(500).json({
+                        ok: false,
+                        mensaje: 'Error cargando usuario',
+                        errors: err
+                    });
+                }
+
+                res.status(200).json({
+                    ok: true,
+                    usuarios: usuarios
+                });
+            });
 });
 
 if(process.env.NODE_ENV === 'production'){
@@ -52,10 +72,10 @@ mongoose.connect('mongodb://localhost:27017/guardsDB', {useNewUrlParser: true});
 mongoose.set('useCreateIndex', true);
 
 // Routes
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 
-app.use(require('./routes/users'));
+// app.use(require('./routes/users'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -72,5 +92,6 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
 
 module.exports = app;
