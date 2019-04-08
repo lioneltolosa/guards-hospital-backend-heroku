@@ -34,14 +34,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('*', function (req, res){
-    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+app.get('*', function (req, res) {
+    const index = path.join(__dirname, 'build', 'index.html');
+    res.sendFile(index);
 });
-
 
 // Conexión a la base de datos
 mongoose.connect('mongodb://localhost:27017/guardsDB', {useNewUrlParser: true});
