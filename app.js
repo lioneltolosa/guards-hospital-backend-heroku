@@ -36,9 +36,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('*', function (req, res) {
-    const index = path.join(__dirname, 'build', 'index.html');
-    res.sendFile(index);
+app.get('/usuariosss', function(req, res) {
+    res.json('get Usuario LOCAL!!!');
 });
 
 // Conexión a la base de datos
