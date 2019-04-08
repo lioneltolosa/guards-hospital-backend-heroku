@@ -8,10 +8,17 @@ var app = express();
 
 var Usuario = require('../models/users');
 
+// app.get('/',(req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+// });
+
 // ==========================================
 // Obtener todos los usuarios
 // ==========================================
 app.get('/users', (req, res, next) => {
+    
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+
     Usuario.find({}, 'nombre email img role')
         .exec(
             (err, usuarios) => {

@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 
 // Imports Routes
 var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/users');
 var app = express();
 
 const port = process.env.PORT || 3000;
@@ -34,11 +34,18 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/test', function(req, res) {
     res.json('get Usuario LOCAL!!!');
 });
+
+if(process.env.NODE_ENV === 'production'){
+    //set static folder
+    app.use(express.static('client/build'));
+}
 
 // Conexión a la base de datos
 mongoose.connect('mongodb://localhost:27017/guardsDB', {useNewUrlParser: true});
@@ -46,7 +53,7 @@ mongoose.set('useCreateIndex', true);
 
 // Routes
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 
 app.use(require('./routes/users'));
 
