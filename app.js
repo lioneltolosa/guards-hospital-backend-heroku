@@ -7,8 +7,8 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 // Imports Routes
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
 var app = express();
 
 const port = process.env.PORT || 3000;
@@ -45,8 +45,8 @@ mongoose.connect('mongodb://localhost:27017/guardsDB', {useNewUrlParser: true});
 mongoose.set('useCreateIndex', true);
 
 // Routes
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -91,35 +91,35 @@ app.get('/users', (req, res, next) => {
 // ==========================================
 // Crear un nuevo usuario
 // ==========================================
-app.post('/users', (req, res) => {
+// app.post('/users', (req, res) => {
 
-    var body = req.body;
+//     var body = req.body;
 
-    var usuario = new Usuario({
-        nombre: body.nombre,
-        email: body.email,
-        password: bcrypt.hashSync(body.password, 10),
-        img: body.img,
-        role: body.role
-    });
+//     var usuario = new Usuario({
+//         nombre: body.nombre,
+//         email: body.email,
+//         password: bcrypt.hashSync(body.password, 10),
+//         img: body.img,
+//         role: body.role
+//     });
 
-    usuario.save((err, usuarioGuardado) => {
+//     usuario.save((err, usuarioGuardado) => {
 
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                mensaje: 'Error al crear usuario',
-                errors: err
-            });
-        }
+//         if (err) {
+//             return res.status(400).json({
+//                 ok: false,
+//                 mensaje: 'Error al crear usuario',
+//                 errors: err
+//             });
+//         }
 
-        res.status(201).json({
-            ok: true,
-            usuario: usuarioGuardado,
-            usuariotoken: req.usuario
-        });
-    });
-});
+//         res.status(201).json({
+//             ok: true,
+//             usuario: usuarioGuardado,
+//             usuariotoken: req.usuario
+//         });
+//     });
+// });
 
 
 module.exports = app;
