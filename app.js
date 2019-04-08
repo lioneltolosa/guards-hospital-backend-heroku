@@ -6,11 +6,11 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
-var Usuario = require('./models/users');
+// var Usuario = require('./models/users');
 
 // Imports Routes
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 var app = express();
 
 const port = process.env.PORT || 3000;
@@ -42,29 +42,29 @@ app.get('/test', function(req, res) {
     res.json('get Usuario LOCAL!!!');
 });
 
-app.get('/users', (req, res, next) => {
-    res.status(200).json({
-        ok: true,
-        mensaje: 'Error cargando usuario',
-    });
+// app.get('/users', (req, res, next) => {
+//     res.status(200).json({
+//         ok: true,
+//         mensaje: 'Error cargando usuario',
+//     });
 
-    // Usuario.find({}, 'nombre email img role')
-    //     .exec(
-    //         (err, usuarios) => {
-    //             if (err) {
-    //                 return res.status(500).json({
-    //                     ok: false,
-    //                     mensaje: 'Error cargando usuario',
-    //                     errors: err
-    //                 });
-    //             }
+//     // Usuario.find({}, 'nombre email img role')
+//     //     .exec(
+//     //         (err, usuarios) => {
+//     //             if (err) {
+//     //                 return res.status(500).json({
+//     //                     ok: false,
+//     //                     mensaje: 'Error cargando usuario',
+//     //                     errors: err
+//     //                 });
+//     //             }
 
-    //             res.status(200).json({
-    //                 ok: true,
-    //                 usuarios: usuarios
-    //             });
-    //         });
-});
+//     //             res.status(200).json({
+//     //                 ok: true,
+//     //                 usuarios: usuarios
+//     //             });
+//     //         });
+// });
 
 if(process.env.NODE_ENV === 'production'){
     //set static folder
@@ -76,8 +76,8 @@ mongoose.connect('mongodb://localhost:27017/guardsDB', {useNewUrlParser: true});
 mongoose.set('useCreateIndex', true);
 
 // Routes
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 // app.use(require('./routes/users'));
 
