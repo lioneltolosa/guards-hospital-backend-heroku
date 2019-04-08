@@ -7,6 +7,6 @@ app.get('/', (req, res, next) => {
         ok: true,
         mensaje: 'Route Working Perfectly'
     });
-});z
+});
 
 module.exports = app;

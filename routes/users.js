@@ -1,7 +1,6 @@
 var express = require('express');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
-var path = require('path');
 
 // var mdAutenticacion = require('../middlewares/autenticacion');
 
