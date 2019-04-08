@@ -36,6 +36,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+if (process.env.NODE_ENV === 'prod') {
+	app.use(express.static('public'));
+}
+
 // Conexión a la base de datos
 mongoose.connect('mongodb://localhost:27017/guardsDB', {useNewUrlParser: true});
 mongoose.set('useCreateIndex', true);
